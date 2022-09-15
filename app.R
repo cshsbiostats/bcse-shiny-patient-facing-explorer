@@ -14,9 +14,23 @@ treatment_list <- data %>%
   pull(trt) %>% 
   unique()
 
-response_list <- data %>% 
-  pull(response) %>% 
-  unique()
+response_list <- local({
+  response_list <- data %>%
+    pull(response) %>%
+    unique()
+  
+  response_list <-
+    response_list[!response_list %in% c("No Response", "Off trial")]
+  
+  factor(response_list,
+         c(
+           "Not at all",
+           "Slightly",
+           "Moderately",
+           "Quite a bit",
+           "Extremely"
+         ))
+})
 
 time_interval <- data %>% 
   summarise(min = min(time_point), max = max(time_point)) %>% 
@@ -31,6 +45,14 @@ dashboard_body <- dashboardBody(
     infoBoxOutput('box_total_patients'),
     infoBoxOutput('box_symptom'),
     infoBoxOutput('box_severity'),
+  ),
+  fluidRow(
+    box(
+      title = 'Sankey Diagram',
+      width = 12,
+      plotOutput('sankey_diagram'),
+      height = '50%'
+    )
   ),
   fluidRow(
     box(
