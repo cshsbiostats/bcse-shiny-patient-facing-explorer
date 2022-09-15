@@ -137,7 +137,7 @@ server <- function(input, output) {
     
     val <- extract_total_responded(box_results()$total_responded)
     
-    infoBox(value = val, title = 'Total Patients Responded')
+    infoBox(value = val, title = 'Total Patients Responded', icon = icon('chart-bar'))
     
   })
   
