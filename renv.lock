@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.0",
+    "Version": "4.2.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -447,6 +447,26 @@
         "scales",
         "tibble",
         "withr"
+      ]
+    },
+    "ggsankey": {
+      "Package": "ggsankey",
+      "Version": "0.0.99999",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ggsankey",
+      "RemoteUsername": "davidsjoberg",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "be08dd0f86eaee9f9ff9e7ff95d47930660a3c36",
+      "Hash": "87b516322783c2dd4099d8a460e747e8",
+      "Requirements": [
+        "dplyr",
+        "ggplot2",
+        "magrittr",
+        "purrr",
+        "stringr",
+        "tidyr"
       ]
     },
     "glue": {
