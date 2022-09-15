@@ -33,13 +33,12 @@ dashboard_body <- dashboardBody(
     infoBoxOutput('box_severity'),
   ),
   fluidRow(
-    # box(
-    #   title = 'Sankey Diagram',
-    #   width = 12,
-    #   plotOutput('sankey_diagram'),
-    #   height = '50%'
-    # )
-    uiOutput('box_sankey')
+    box(
+      title = 'Sankey Diagram',
+      width = 12,
+      plotOutput('sankey_diagram'),
+      height = '50%'
+    )
   ),
   fluidRow(
     infoBoxOutput('box_total_responded', width = 12),
@@ -119,16 +118,7 @@ server <- function(input, output) {
     make_sankey_diagram(cohort())
     
   }, res = 100)
-  
-  output$box_sankey <- renderUI({
-    box(
-      title = 'Sankey Diagram',
-      width = 12,
-      plotOutput('sankey_diagram'),
-      height = '50%'
-    )
-  })
-  
+
   box_results <- eventReactive(input$visualize, {
     value_box_results(cohort())
   })
