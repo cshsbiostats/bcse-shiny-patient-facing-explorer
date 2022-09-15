@@ -55,14 +55,6 @@ dashboard_body <- dashboardBody(
     )
   ),
   fluidRow(
-    box(
-      title = 'Sankey Diagram',
-      width = 12,
-      plotOutput('sankey_diagram'),
-      height = '50%'
-    )
-  ),
-  fluidRow(
     infoBoxOutput('box_total_responded', width = 12),
   ),
   fluidRow(
