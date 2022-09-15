@@ -41,30 +41,6 @@ extract_total_responded <- \(data) {
   data %>% pull(n) %>% sum()
 }
 
-construct_valuebox <- \(box_results, subtitle) {
-  
-  renderValueBox({
-    
-    val <- extract_box_results(box_results, box_response = subtitle)
-    
-    valueBox(value = val, subtitle = subtitle)
-    
-  })
-  
-}
-
-construct_infobox <- \(box_results, title) {
-  
-  renderInfoBox({
-    
-    val <- extract_box_results(box_results, box_response = title)
-    
-    infoBox(title = title, value = val)
-    
-  })
-  
-}
-
 # res <- value_box_results(data)
 
 # extract_box_results(res$total_responded, 'Not at all')

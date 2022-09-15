@@ -28,20 +28,21 @@ dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', ti
 
 dashboard_body <- dashboardBody(
   fluidRow(
-    box(title = 'Total Patients', width = 4),
-    box(title = 'Symptom', width = 4),
-    box(title = 'Severity', width = 4)
+    infoBoxOutput('box_total_patients'),
+    infoBoxOutput('box_symptom'),
+    infoBoxOutput('box_severity'),
   ),
   fluidRow(
-    box(
-      title = 'Sankey Diagram',
-      width = 12,
-      plotOutput('sankey_diagram'),
-      height = '50%'
-    )
+    # box(
+    #   title = 'Sankey Diagram',
+    #   width = 12,
+    #   plotOutput('sankey_diagram'),
+    #   height = '50%'
+    # )
+    uiOutput('box_sankey')
   ),
   fluidRow(
-    valueBoxOutput('box_total_responded', width = 12),
+    infoBoxOutput('box_total_responded', width = 12),
   ),
   fluidRow(
     valueBoxOutput('box_not_at_all', width = 12),
@@ -106,32 +107,101 @@ server <- function(input, output) {
     )
   })
   
+  selected_severity <- eventReactive(input$visualize, {
+    input$severity
+  })
+  
+  selected_symptom <- eventReactive(input$visualize, {
+    input$symptom
+  })
+  
   output$sankey_diagram <- renderPlot({
     make_sankey_diagram(cohort())
     
   }, res = 100)
   
-  box_results <- reactive({
+  output$box_sankey <- renderUI({
+    box(
+      title = 'Sankey Diagram',
+      width = 12,
+      plotOutput('sankey_diagram'),
+      height = '50%'
+    )
+  })
+  
+  box_results <- eventReactive(input$visualize, {
     value_box_results(cohort())
   })
   
-  output$box_total_responded <- renderValueBox({
+  output$box_total_responded <- renderInfoBox({
     
     val <- extract_total_responded(box_results()$total_responded)
     
-    valueBox(value = val, subtitle = 'Total Patients Responded')
+    infoBox(value = val, title = 'Total Patients Responded')
     
   })
   
-  output$box_not_at_all <- construct_valuebox(box_results()$total_responded, 'Not at all')
+  output$box_not_at_all <- renderValueBox({
+    
+    val <- extract_box_results(box_results()$total_responded, box_response = 'Not at all')
+    
+    valueBox(value = val, subtitle = 'Not at all')
+    
+  })
   
-  output$box_slightly <- construct_valuebox(box_results()$total_responded, 'Slightly')
+  output$box_slightly <- renderValueBox({
+    
+    val <- extract_box_results(box_results()$total_responded, box_response ='Slightly')
+    
+    valueBox(value = val, subtitle = 'Slightly', color = 'green')
+    
+  })
   
-  output$box_moderately <- construct_valuebox(box_results()$total_responded, 'Moderately')
+  output$box_moderately <- renderValueBox({
+    
+    val <- extract_box_results(box_results()$total_responded, box_response ='Moderately')
+    
+    valueBox(value = val, subtitle = 'Moderately', color = 'yellow')
+    
+  })
 
-  output$box_quiteabit <- construct_valuebox(box_results()$total_responded, 'Quite a bit')
+  output$box_quiteabit <- renderValueBox({
+    
+    val <- extract_box_results(box_results()$total_responded, box_response ='Quite a bit')
+    
+    valueBox(value = val, subtitle = 'Quite a bit', color = 'orange')
+    
+  })
 
-  output$box_extremely <- construct_valuebox(box_results()$total_responded, 'Extremely')
+  output$box_extremely <- renderValueBox({
+    
+    val <- extract_box_results(box_results()$total_responded, box_response ='Extremely')
+    
+    valueBox(value = val, subtitle = 'Extremely', color = 'red')
+    
+  })
+  
+  output$box_symptom <- renderInfoBox({
+    infoBox(title = 'Selected Symptom', value = selected_symptom(), icon = icon('stethoscope'),
+            color = 'green')
+  })
+  
+  output$box_total_patients <- renderInfoBox({
+    
+    val <- c(box_results()$total_responded$n, box_results()$total_not_responded$n) %>% 
+      sum()
+    
+    infoBox(title = 'Initial Patient Cohort', value = val, icon = icon('female'),
+            color = 'green')
+  })
+  
+  output$box_severity <- renderInfoBox({
+    
+    val <- selected_severity()
+    
+    infoBox(title = 'Severity', value = val, icon = icon('bar-chart'),
+            color = 'green')
+  })
   
 }
 
