@@ -38,7 +38,7 @@ time_interval <- data %>%
 
 # -------------------------------------------------------------------------
 
-dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', titleWidth = 500)
+dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', titleWidth = 400)
 
 dashboard_body <- dashboardBody(
   fluidRow(
@@ -69,7 +69,7 @@ dashboard_body <- dashboardBody(
 )
 
 dashboard_sidebar <- dashboardSidebar(
-  width = '500',
+  width = '400',
   collapsed = F,
   selectInput(
     'symptom',
@@ -98,7 +98,7 @@ dashboard_sidebar <- dashboardSidebar(
     choices = response_list,
     width = '100%'
   ),
-  actionButton('visualize', 'Visualize Cohort', width = '94%',
+  actionButton('visualize', 'Visualize Cohort', width = '93%',
                style = 'align: center;')
 )
 
