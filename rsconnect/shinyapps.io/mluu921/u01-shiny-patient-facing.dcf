@@ -5,9 +5,9 @@ account: mluu921
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7017259
-bundleId: 6306450
+bundleId: 6306478
 url: https://mluu921.shinyapps.io/u01-shiny-patient-facing/
-when: 1663270148.75389
-lastSyncTime: 1663270148.75391
+when: 1663270752.73823
+lastSyncTime: 1663270752.73825
 asMultiple: FALSE
 asStatic: FALSE
