@@ -157,11 +157,7 @@ server <- function(input, output) {
   
   showModal(
     modalDialog(
-<<<<<<< HEAD
       title = "Welcome to the Breast Cancer Symptom Explorer!",
-=======
-      title = "Welcome!",
->>>>>>> 58265d7a43d510272390220589d310ee31626e36
       'This tool allows you to view different trajectories for common symptoms of
       varying severity levels experienced by breast cancer patients treated with either tamoxifen or
       anastrozole over a 5 year time period. By selecting the specific symptom type, treatment,
