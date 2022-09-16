@@ -89,19 +89,6 @@ dashboard_sidebar <- dashboardSidebar(
   minified = F,
   expandOnHover = F,
   skin = 'light',
-  fluidRow(box(
-    title = 'Background',
-    width = 12,
-    collapsible = F,
-    status = 'primary',
-    helpText(
-      'This tool allows you to view different trajectories for common symptoms of
-      varying severity levels experienced by breast cancer patients treated with either tamoxifen or
-      anastrozole over a 5 year time period. By selecting the specific symptom type, treatment,
-      and severity you can visualize different scenarios across different points of time and
-      how they may relate to you or someone you know.'
-    )
-  )),
   fluidRow(
     box(
       title = 'Symptom Explore Inputs',
@@ -167,6 +154,20 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
+  
+  showModal(
+    modalDialog(
+      title = "Welcome to the Breast Cancer Symptom Explorer!",
+      'This tool allows you to view different trajectories for common symptoms of
+      varying severity levels experienced by breast cancer patients treated with either tamoxifen or
+      anastrozole over a 5 year time period. By selecting the specific symptom type, treatment,
+      and severity you can visualize different scenarios across different points of time and
+      how they may relate to you or someone you know.',
+      easyClose = TRUE,
+      footer = NULL,
+      size = 'l'
+    )
+  )
   
   cohort <- eventReactive(input$visualize, {
     select_cohort(
