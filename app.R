@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+library(bs4Dash)
 library(here)
 library(tidyverse)
 library(ggsankey)
@@ -38,13 +39,13 @@ time_interval <- data %>%
 
 # -------------------------------------------------------------------------
 
-dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', titleWidth = 400)
+dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', titleWidth = '100%')
 
 dashboard_body <- dashboardBody(
   fluidRow(
     infoBoxOutput('box_total_patients'),
     infoBoxOutput('box_symptom'),
-    infoBoxOutput('box_severity'),
+    infoBoxOutput('box_severity')
   ),
   fluidRow(
     box(
@@ -69,8 +70,11 @@ dashboard_body <- dashboardBody(
 )
 
 dashboard_sidebar <- dashboardSidebar(
-  width = '400',
+  width = '50%',
   collapsed = F,
+  minified = F,
+  expandOnHover = F,
+  skin = 'light',
   selectInput(
     'symptom',
     label = 'Symptom',
@@ -98,8 +102,8 @@ dashboard_sidebar <- dashboardSidebar(
     choices = response_list,
     width = '100%'
   ),
-  actionButton('visualize', 'Visualize Cohort', width = '93%',
-               style = 'align: center;')
+  actionButton('visualize', 'Visualize Cohort', width = '100%',
+               style = 'margin: auto;')
 )
 
 ui <- dashboardPage(
@@ -149,7 +153,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response = 'Not at all')
     
-    valueBox(value = val, subtitle = 'Not at all')
+    valueBox(value = val, subtitle = 'Not at all', color = 'lightblue')
     
   })
   
@@ -157,7 +161,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Slightly')
     
-    valueBox(value = val, subtitle = 'Slightly', color = 'green')
+    valueBox(value = val, subtitle = 'Slightly', color = 'olive')
     
   })
   
@@ -165,7 +169,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Moderately')
     
-    valueBox(value = val, subtitle = 'Moderately', color = 'yellow')
+    valueBox(value = val, subtitle = 'Moderately', color = 'warning')
     
   })
 
@@ -181,13 +185,13 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Extremely')
     
-    valueBox(value = val, subtitle = 'Extremely', color = 'red')
+    valueBox(value = val, subtitle = 'Extremely', color = 'danger')
     
   })
   
   output$box_symptom <- renderInfoBox({
     infoBox(title = 'Selected Symptom', value = selected_symptom(), icon = icon('stethoscope'),
-            color = 'green')
+            color = 'success')
   })
   
   output$box_total_patients <- renderInfoBox({
@@ -196,7 +200,7 @@ server <- function(input, output) {
       sum()
     
     infoBox(title = 'Initial Patient Cohort', value = val, icon = icon('female'),
-            color = 'green')
+            color = 'success')
   })
   
   output$box_severity <- renderInfoBox({
@@ -204,7 +208,7 @@ server <- function(input, output) {
     val <- selected_severity()
     
     infoBox(title = 'Severity', value = val, icon = icon('bar-chart'),
-            color = 'green')
+            color = 'success')
   })
   
 }
