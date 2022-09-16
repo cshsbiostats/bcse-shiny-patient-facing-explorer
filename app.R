@@ -148,9 +148,10 @@ dashboard_sidebar <- dashboardSidebar(
       ),
       actionButton(
         'visualize',
-        'Visualize Cohort',
+        'Click to Visualize',
         width = '100%',
-        style = 'margin: auto;'
+        style = 'margin: auto;',
+        icon = icon('bar-chart')
       )
     )
   )
