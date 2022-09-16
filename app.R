@@ -218,7 +218,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response = 'Not at all')
     
-    valueBox(value = val, subtitle = 'Not at all', color = 'lightblue', icon = icon('smile'))
+    valueBox(value = val, subtitle = 'Not at all', color = 'olive', icon = icon('smile'))
     
   })
   
@@ -226,7 +226,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Slightly')
     
-    valueBox(value = val, subtitle = 'Slightly', color = 'olive', icon = icon('meh'))
+    valueBox(value = val, subtitle = 'Slightly', color = 'lightblue', icon = icon('meh'))
     
   })
   

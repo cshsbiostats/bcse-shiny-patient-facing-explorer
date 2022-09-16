@@ -24,8 +24,8 @@ make_sankey_diagram <- \(data) {
   )
   
   manual_colors <- c('No Response' = "#808080",
-                     'Not at all' = "#007bff", 
-                     'Slightly' = "#3d9970", 
+                     'Not at all' = "#3d9970", 
+                     'Slightly' = "#007bff", 
                      'Moderately' = "#ffc107", 
                      'Quite a bit' = "#ff851b", 
                      'Extremely' = "#dc3545", 
