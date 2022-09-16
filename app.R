@@ -45,6 +45,7 @@ dashboard_body <- dashboardBody(
   fluidRow(
     box(width = 12, 
         title = 'Initial Selected Cohort',
+        status = 'primary',
         fluidRow(
           width = 12,
           infoBoxOutput('box_total_patients'),
@@ -56,6 +57,7 @@ dashboard_body <- dashboardBody(
     box(
       title = 'Sankey Diagram',
       width = 12,
+      status = 'primary',
       plotOutput('sankey_diagram'),
       height = '50%'
     )
@@ -64,6 +66,7 @@ dashboard_body <- dashboardBody(
     box(
       title = 'Results at Final Timepoint',
       width = 12,
+      status = 'primary',
       fluidRow(
         infoBoxOutput('box_total_responded', width = 12),
       ),
@@ -87,8 +90,10 @@ dashboard_sidebar <- dashboardSidebar(
   expandOnHover = F,
   skin = 'light',
   fluidRow(box(
+    title = 'Background',
     width = 12,
     collapsible = F,
+    status = 'primary',
     helpText(
       'This tool allows you to view different trajectories for common symptoms of
       varying severity levels experienced by breast cancer patients treated with either tamoxifen or
@@ -99,8 +104,10 @@ dashboard_sidebar <- dashboardSidebar(
   )),
   fluidRow(
     box(
+      title = 'Symptom Explore Inputs',
       width = 12,
       collapsible = F,
+      status = 'primary',
       helpText('Please select one item from the list of symptoms using the drop-down menu or typing text in the box.'),
       selectInput(
         'symptom',
