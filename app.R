@@ -86,35 +86,68 @@ dashboard_sidebar <- dashboardSidebar(
   minified = F,
   expandOnHover = F,
   skin = 'light',
-  selectInput(
-    'symptom',
-    label = 'Symptom',
-    choices = symptom_list,
-    width = '100%'
-  ),
-  selectInput(
-    'treatment',
-    label = 'Treatment',
-    choices = treatment_list,
-    width = '100%'
-  ),
-  sliderInput(
-    'timeinterval',
-    label = 'Time Interval',
-    min = time_interval[[1]],
-    max = time_interval[[2]],
-    step = 6,
-    value = c(0, 12),
-    width = '100%'
-  ),
-  selectInput(
-    'severity',
-    label = 'Severity',
-    choices = response_list,
-    width = '100%'
-  ),
-  actionButton('visualize', 'Visualize Cohort', width = '100%',
-               style = 'margin: auto;')
+  fluidRow(box(
+    width = 12,
+    collapsible = F,
+    helpText(
+      'This tool allows you to view different trajectories for common symptoms of
+      varying severity levels experienced by breast cancer patients treated with either tamoxifen or
+      anastrozole over a 5 year time period. By selecting the specific symptom type, treatment,
+      and severity you can visualize different scenarios across different points of time and
+      how they may relate to you or someone you know.'
+    )
+  )),
+  fluidRow(
+    box(
+      width = 12,
+      collapsible = F,
+      helpText('Please select one item from the list of symptoms using the drop-down menu or typing text in the box.'),
+      selectInput(
+        'symptom',
+        label = '1. Select symptom',
+        choices = symptom_list,
+        width = '100%',
+        selected = sample(symptom_list, size = 1)
+      ),
+      hr(),
+      helpText('Select either Tamoxifen or Anastrozole treatment from the drop-down menu'),
+      selectInput(
+        'treatment',
+        label = '2. Select treatment',
+        choices = treatment_list,
+        width = '100%',
+        selected = sample(treatment_list, size = 1)
+      ),
+      hr(),
+      helpText('Use the slider to select the starting and ending timepoint. 
+               This can start at 0 months (or baseline) and can go up to 72 months (or 6 years).'),
+      sliderInput(
+        'timeinterval',
+        label = '3. Select time interval (months)',
+        min = time_interval[[1]],
+        max = time_interval[[2]],
+        step = 6,
+        value = c(0, sample(seq(6, 72, 6), size = 1)),
+        width = '100%'
+      ),
+      hr(),
+      helpText('Select a corresponding severity level from the drop-down menu. Severity ranges from “Not at all” 
+               (the lowest level of severity) to “Extremely” (the highest level of severity experienced)'),
+      selectInput(
+        'severity',
+        label = '4. Select initial severity',
+        choices = response_list,
+        width = '100%',
+        selected = sample(response_list, size = 1)
+      ),
+      actionButton(
+        'visualize',
+        'Visualize Cohort',
+        width = '100%',
+        style = 'margin: auto;'
+      )
+    )
+  )
 )
 
 ui <- dashboardPage(
