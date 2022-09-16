@@ -23,13 +23,13 @@ make_sankey_diagram <- \(data) {
     )
   )
   
-  manual_colors <- c('No Response' = "#1F77B4FF",
-                     'Not at all' = "#FF7F0EFF", 
-                     'Slightly' = "#2CA02CFF", 
-                     'Moderately' = "#D62728FF", 
-                     'Quite a bit' = "#9467BDFF", 
-                     'Extremely' = "#8C564BFF", 
-                     'Off trial' = "#E377C2FF")
+  manual_colors <- c('No Response' = "#808080",
+                     'Not at all' = "#007bff", 
+                     'Slightly' = "#3d9970", 
+                     'Moderately' = "#ffc107", 
+                     'Quite a bit' = "#ff851b", 
+                     'Extremely' = "#dc3545", 
+                     'Off trial' = "#000000")
   
   ggplot(plot_data,
          aes(
