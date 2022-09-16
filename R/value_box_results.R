@@ -16,7 +16,7 @@ value_box_results <- \(data) {
     count(response) %>%
     mutate(prop = n / total_patients) %>%
     mutate(label = glue::glue('{n} ({scales::label_percent(accuracy = .1)(prop)})')) %>% 
-    complete(response = c('Not at all', 'Slightly', 'Quite a bit', 'Moderately', 'Extremely'), fill = list(label = '0 (0.0%)'))
+    complete(response = c('Not at all', 'Slightly', 'Quite a bit', 'Moderately', 'Extremely'), fill = list(label = '0 (0.0%)', n = 0))
   
   total_not_responded <- data %>%
     group_by(patientid) %>%
