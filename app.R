@@ -108,7 +108,8 @@ dashboard_sidebar <- dashboardSidebar(
       width = 12,
       collapsible = F,
       status = 'primary',
-      helpText('Please select one item from the list of symptoms using the drop-down menu or typing text in the box.'),
+      helpText('Please select one item from the list of symptoms using the drop-down menu or 
+               typing text in the box.'),
       selectInput(
         'symptom',
         label = '1. Select symptom',
@@ -138,8 +139,10 @@ dashboard_sidebar <- dashboardSidebar(
         width = '100%'
       ),
       hr(),
-      helpText('Select a corresponding severity level from the drop-down menu. Severity ranges from “Not at all” 
-               (the lowest level of severity) to “Extremely” (the highest level of severity experienced)'),
+      helpText('Select a corresponding severity level from the drop-down menu. 
+               Severity ranges from “Not at all” 
+               (the lowest level of severity) to “Extremely” 
+               (the highest level of severity experienced)'),
       selectInput(
         'severity',
         label = '4. Select initial severity',
