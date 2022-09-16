@@ -218,7 +218,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response = 'Not at all')
     
-    valueBox(value = val, subtitle = 'Not at all', color = 'lightblue')
+    valueBox(value = val, subtitle = 'Not at all', color = 'lightblue', icon = icon('smile'))
     
   })
   
@@ -226,7 +226,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Slightly')
     
-    valueBox(value = val, subtitle = 'Slightly', color = 'olive')
+    valueBox(value = val, subtitle = 'Slightly', color = 'olive', icon = icon('meh'))
     
   })
   
@@ -234,7 +234,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Moderately')
     
-    valueBox(value = val, subtitle = 'Moderately', color = 'warning')
+    valueBox(value = val, subtitle = 'Moderately', color = 'warning', icon = icon('grimace'))
     
   })
 
@@ -242,7 +242,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Quite a bit')
     
-    valueBox(value = val, subtitle = 'Quite a bit', color = 'orange')
+    valueBox(value = val, subtitle = 'Quite a bit', color = 'orange', icon = icon('frown'))
     
   })
 
@@ -250,7 +250,7 @@ server <- function(input, output) {
     
     val <- extract_box_results(box_results()$total_responded, box_response ='Extremely')
     
-    valueBox(value = val, subtitle = 'Extremely', color = 'danger')
+    valueBox(value = val, subtitle = 'Extremely', color = 'danger', icon = icon('sad-cry'))
     
   })
   
@@ -272,7 +272,7 @@ server <- function(input, output) {
     
     val <- selected_severity()
     
-    infoBox(title = 'Severity', value = val, icon = icon('bar-chart'),
+    infoBox(title = 'Severity', value = val, icon = icon('file-medical'),
             color = 'success')
   })
   
