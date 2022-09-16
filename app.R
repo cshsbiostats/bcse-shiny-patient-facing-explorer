@@ -43,9 +43,14 @@ dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', ti
 
 dashboard_body <- dashboardBody(
   fluidRow(
-    infoBoxOutput('box_total_patients'),
-    infoBoxOutput('box_symptom'),
-    infoBoxOutput('box_severity')
+    box(width = 12, 
+        title = 'Initial Selected Cohort',
+        fluidRow(
+          width = 12,
+          infoBoxOutput('box_total_patients'),
+          infoBoxOutput('box_symptom'),
+          infoBoxOutput('box_severity'))
+        )
   ),
   fluidRow(
     box(
@@ -56,16 +61,22 @@ dashboard_body <- dashboardBody(
     )
   ),
   fluidRow(
-    infoBoxOutput('box_total_responded', width = 12),
-  ),
-  fluidRow(
-    valueBoxOutput('box_not_at_all', width = 12),
-  ),
-  fluidRow(
-    valueBoxOutput('box_slightly', width = 3),
-    valueBoxOutput('box_moderately', width = 3),
-    valueBoxOutput('box_quiteabit', width = 3),
-    valueBoxOutput('box_extremely', width = 3)
+    box(
+      title = 'Results at Final Timepoint',
+      width = 12,
+      fluidRow(
+        infoBoxOutput('box_total_responded', width = 12),
+      ),
+      fluidRow(
+        valueBoxOutput('box_not_at_all', width = 12),
+      ),
+      fluidRow(
+        valueBoxOutput('box_slightly', width = 3),
+        valueBoxOutput('box_moderately', width = 3),
+        valueBoxOutput('box_quiteabit', width = 3),
+        valueBoxOutput('box_extremely', width = 3)
+    )
+  )
   )
 )
 
