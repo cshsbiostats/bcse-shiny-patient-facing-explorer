@@ -46,6 +46,7 @@ dashboard_body <- dashboardBody(
     box(width = 12, 
         title = 'Initial Selected Cohort',
         status = 'primary',
+        footer = 'The following are the selected cohort of interest based upon the tool inputs.',
         fluidRow(
           width = 12,
           infoBoxOutput('box_total_patients'),
@@ -59,7 +60,14 @@ dashboard_body <- dashboardBody(
       width = 12,
       status = 'primary',
       plotOutput('sankey_diagram'),
-      height = '50%'
+      height = '50%',
+      footer = 'The following is a Sankey Diagram. 
+      The purpose of this diagram is to allow the user to visualize the flow of patient 
+      from one timepoint to another by varying levels of severity as selected by the inputs. The following diagram is visualizing the 
+      initial timepoint of interest to the final timepoint of interest.
+      The size of each "block" or "node" represents the relative proportion of the 
+      patients that provided that response at the given month (column). 
+      The colored height or size of the bands represents the relative proportion of the patients flowing from one timepoint to the next.'
     )
   ),
   fluidRow(
@@ -67,6 +75,7 @@ dashboard_body <- dashboardBody(
       title = 'Results at Final Timepoint',
       width = 12,
       status = 'primary',
+      footer = 'The following are the outcomes among the patients who responded at the final timepoint of interest.',
       fluidRow(
         infoBoxOutput('box_total_responded', width = 12),
       ),
