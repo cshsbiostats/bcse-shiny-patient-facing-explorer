@@ -43,52 +43,13 @@ dashboard_header <- dashboardHeader(title = 'Breast Cancer Symptom Explorer', ti
 
 dashboard_body <- dashboardBody(
   fluidRow(
-    box(width = 12, 
-        title = 'Initial Selected Cohort',
-        status = 'primary',
-        footer = 'The following are the selected cohort of interest based upon the tool inputs.',
-        fluidRow(
-          width = 12,
-          infoBoxOutput('box_total_patients'),
-          infoBoxOutput('box_symptom'),
-          infoBoxOutput('box_severity'))
-        )
+    column(width = 12, uiOutput('initial_selected_cohort_box'))
   ),
   fluidRow(
-    box(
-      title = 'Sankey Diagram',
-      width = 12,
-      status = 'primary',
-      plotOutput('sankey_diagram'),
-      height = '50%',
-      footer = 'The following is a Sankey Diagram. 
-      The purpose of this diagram is to allow the user to visualize the flow of patient 
-      from one timepoint to another by varying levels of severity as selected by the inputs. The following diagram is visualizing the 
-      initial timepoint of interest to the final timepoint of interest.
-      The size of each "block" or "node" represents the relative proportion of the 
-      patients that provided that response at the given month (column). 
-      The colored height or size of the bands represents the relative proportion of the patients flowing from one timepoint to the next.'
-    )
+    column(width = 12, uiOutput('sankey_diagram_box'))
   ),
   fluidRow(
-    box(
-      title = 'Results at Final Timepoint',
-      width = 12,
-      status = 'primary',
-      footer = 'The following are the outcomes among the patients who responded at the final timepoint of interest.',
-      fluidRow(
-        infoBoxOutput('box_total_responded', width = 12),
-      ),
-      fluidRow(
-        valueBoxOutput('box_not_at_all', width = 12),
-      ),
-      fluidRow(
-        valueBoxOutput('box_slightly', width = 3),
-        valueBoxOutput('box_moderately', width = 3),
-        valueBoxOutput('box_quiteabit', width = 3),
-        valueBoxOutput('box_extremely', width = 3)
-    )
-  )
+    column(width = 12, uiOutput('final_timepoint_box'))
   )
 )
 
@@ -274,6 +235,60 @@ server <- function(input, output) {
     
     infoBox(title = 'Severity', value = val, icon = icon('file-medical'),
             color = 'success')
+  })
+  
+  observeEvent(input$visualize, {
+    
+    output$initial_selected_cohort_box <- renderUI({
+      box(width = 12, 
+          title = 'Initial Selected Cohort',
+          status = 'primary',
+          footer = 'The following are the selected cohort of interest based upon the tool inputs.',
+          fluidRow(
+            width = 12,
+            infoBoxOutput('box_total_patients'),
+            infoBoxOutput('box_symptom'),
+            infoBoxOutput('box_severity'))
+      )
+    })
+    
+    output$sankey_diagram_box <- renderUI({
+      box(
+        title = 'Sankey Diagram',
+        width = 12,
+        status = 'primary',
+        plotOutput('sankey_diagram'),
+        height = '50%',
+        footer = 'The following is a Sankey Diagram. 
+      The purpose of this diagram is to allow the user to visualize the flow of patient 
+      from one timepoint to another by varying levels of severity as selected by the inputs. The following diagram is visualizing the 
+      initial timepoint of interest to the final timepoint of interest.
+      The size of each "block" or "node" represents the relative proportion of the 
+      patients that provided that response at the given month (column). 
+      The colored height or size of the bands represents the relative proportion of the patients flowing from one timepoint to the next.'
+      )
+    })
+    
+    output$final_timepoint_box <- renderUI({
+      box(
+        title = 'Results at Final Timepoint',
+        width = 12,
+        status = 'primary',
+        footer = 'The following are the outcomes among the patients who responded at the final timepoint of interest.',
+        fluidRow(
+          infoBoxOutput('box_total_responded', width = 12),
+        ),
+        fluidRow(
+          valueBoxOutput('box_not_at_all', width = 12),
+        ),
+        fluidRow(
+          valueBoxOutput('box_slightly', width = 3),
+          valueBoxOutput('box_moderately', width = 3),
+          valueBoxOutput('box_quiteabit', width = 3),
+          valueBoxOutput('box_extremely', width = 3)
+        )
+      )
+    })
   })
   
 }
