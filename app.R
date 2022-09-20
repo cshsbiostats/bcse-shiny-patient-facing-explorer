@@ -171,7 +171,7 @@ server <- function(input, output) {
     
     val <- extract_total_responded(box_results()$total_responded)
     
-    infoBox(value = val, title = 'Total Patients Responded', icon = icon('chart-bar'))
+    valueBox(value = val, subtitle = 'Total Patients Responded', icon = icon('chart-bar'))
     
   })
   
@@ -275,17 +275,16 @@ server <- function(input, output) {
         width = 12,
         status = 'primary',
         footer = 'The following are the outcomes among the patients who responded at the final timepoint of interest.',
+        # fluidRow(
+        #   infoBoxOutput('box_total_responded', width = 12),
+        # ),
         fluidRow(
-          infoBoxOutput('box_total_responded', width = 12),
-        ),
-        fluidRow(
-          valueBoxOutput('box_not_at_all', width = 12),
-        ),
-        fluidRow(
-          valueBoxOutput('box_slightly', width = 3),
-          valueBoxOutput('box_moderately', width = 3),
-          valueBoxOutput('box_quiteabit', width = 3),
-          valueBoxOutput('box_extremely', width = 3)
+          valueBoxOutput('box_total_responded', width = 2),
+          valueBoxOutput('box_not_at_all', width = 2),
+          valueBoxOutput('box_slightly', width = 2),
+          valueBoxOutput('box_moderately', width = 2),
+          valueBoxOutput('box_quiteabit', width = 2),
+          valueBoxOutput('box_extremely', width = 2)
         )
       )
     })
